@@ -1,0 +1,35 @@
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    
+  
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+function disenharCircunferencia(x,y,r,color){
+    pincel.fillStyle = color ;
+    pincel.beginPath();
+    pincel.arc(x,y,r,0,2*Math.PI);
+    pincel.fill();
+    }
+
+function limpiarPantalla(){
+    pincel.clearRect(0,0,600,400);
+}
+
+var x = 0;
+var y = 20;
+var direccion = 1; // 1 para movimiento de izquierda a derecha, -1 para movimiento de derecha a izquierda
+
+function actualizaPantalla() {
+    limpiarPantalla();
+    disenharCircunferencia(x, 0, 10);
+    x++;
+}
+
+setInterval(actualizaPantalla, 100);
+
+</script> 
