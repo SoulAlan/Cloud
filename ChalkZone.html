@@ -1,0 +1,44 @@
+<canvas width="600" height="400"></canvas>
+
+<input type="color" id="selector-color">
+
+<script>
+    var pantalla = document.querySelector('canvas');
+    var pincel = pantalla.getContext('2d');
+
+    pincel.fillStyle = 'green';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var puedoDibujar = false;
+    var colorSeleccionado = 'blue'; // Color predeterminado
+
+    function dibujarCirculo(evento) {
+        if (puedoDibujar) {
+            var x = evento.pageX - pantalla.offsetLeft;
+            var y = evento.pageY - pantalla.offsetTop;
+            pincel.fillStyle = colorSeleccionado;
+            pincel.beginPath();
+            pincel.arc(x, y, 5, 0, 2 * Math.PI);
+            pincel.fill();
+        }
+    }
+
+    pantalla.onmousemove = dibujarCirculo;
+
+    function habilitarDibujar() {
+        puedoDibujar = true;
+    }
+
+    function deshabilitarDibujar() {
+        puedoDibujar = false;
+    }
+
+    pantalla.onmousedown = habilitarDibujar;
+
+    pantalla.onmouseup = deshabilitarDibujar;
+
+    var selectorColor = document.getElementById('selector-color');
+    selectorColor.addEventListener('change', function(evento) {
+        colorSeleccionado = evento.target.value;
+    });
+</script>
